@@ -6,166 +6,267 @@
   <title>保德信指標變額終身壽險（IVL）｜趙賢彬</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --accent:  #e8643a;
-      --accent2: #4fc3f7;
-      --success: #81c784;
-      --warn:    #ffb74d;
+      --deepbrown: #3E2115;
+      --gold:      #FFD700;
+      --cream:     #F9F5F0;
+      --red:       #CF202E;
+      --warmbrown: #A47551;
     }
+
     .reveal {
       font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
+      background: var(--cream);
     }
     .reveal h1, .reveal h2, .reveal h3 {
       font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
       font-weight: 700;
-      letter-spacing: -0.02em;
     }
-    .reveal h1 { font-size: 2.2em; }
-    .reveal h2 { font-size: 1.5em; color: var(--accent2); }
-    .reveal .progress { color: var(--accent); }
+    .reveal h1 {
+      font-size: 2.4em;
+      color: var(--deepbrown);
+    }
+    .reveal h2 {
+      font-size: 1.3em;
+      color: var(--deepbrown);
+    }
 
-    .title-slide { text-align: center; }
-    .title-slide .tag {
-      display: inline-block;
-      background: var(--accent);
+    .gold-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 6px;
+      background: var(--gold);
+    }
+
+    /* ===== Slide 1 ===== */
+    .slide1-top {
+      background: var(--deepbrown);
+      padding: 20px 0;
+      border-bottom: 4px solid var(--gold);
+      margin-bottom: 12px;
+    }
+    .slide1-top h1 {
       color: #fff;
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 0.55em;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.8em;
+      font-size: 1.6em;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .slide1-top .tag {
+      color: var(--gold);
+      font-size: 0.45em;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .slide1-top .sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.45em;
+      margin-top: 4px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+      text-align: left;
+      font-size: 0.4em;
+      padding: 0 10px;
+    }
+    .info-grid .item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(62,33,21,0.1);
+    }
+    .info-grid .item .label {
+      color: var(--warmbrown);
       font-weight: 600;
     }
-    .title-slide .subtitle { font-size: 0.75em; color: #aaa; margin-top: 0.5em; }
-    .title-slide .author   { margin-top: 2em; font-size: 0.5em; color: #888; }
-
-    .stat-row { display: flex; gap: 20px; justify-content: center; margin-top: 1em; }
-    .stat-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
-      padding: 20px 26px;
-      text-align: center;
-      flex: 1;
+    .info-grid .item .value {
+      color: var(--deepbrown);
     }
-    .stat-card .num   { font-size: 1.8em; font-weight: 800; color: var(--accent); line-height: 1; }
-    .stat-card .label { font-size: 0.42em; color: #ccc; margin-top: 6px; }
 
-    .adv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 0.6em; }
+    .adv-title-row {
+      font-size: 0.5em;
+      font-weight: 700;
+      color: var(--deepbrown);
+      text-align: center;
+      margin: 8px 0 6px;
+      position: relative;
+    }
+    .adv-title-row::after {
+      content: '';
+      display: block;
+      width: 50px; height: 2px;
+      background: var(--gold);
+      margin: 4px auto 0;
+    }
+
+    .adv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 0 10px;
+    }
     .adv-card {
-      background: rgba(255,255,255,0.05);
-      border-top: 4px solid var(--accent2);
+      background: #fff;
       border-radius: 8px;
-      padding: 16px;
+      padding: 12px 10px;
       text-align: center;
+      box-shadow: 0 2px 8px rgba(62,33,21,0.1);
+      border-left: 3px solid var(--gold);
     }
-    .adv-card .adv-title { font-size: 0.55em; font-weight: 700; color: var(--accent2); margin-bottom: 6px; }
-    .adv-card .adv-desc  { font-size: 0.42em; color: #bbb; line-height: 1.6; }
+    .adv-card .adv-title {
+      font-size: 0.5em;
+      font-weight: 700;
+      color: var(--deepbrown);
+      margin-bottom: 4px;
+    }
+    .adv-card .adv-desc {
+      font-size: 0.4em;
+      color: var(--warmbrown);
+      line-height: 1.5;
+    }
 
-    .info-table { width: 100%; border-collapse: collapse; margin-top: 0.6em; font-size: 0.4em; }
-    .info-table th, .info-table td {
-      padding: 8px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+    /* ===== Slide 2 ===== */
+    .slide2-header {
+      background: var(--deepbrown);
+      padding: 8px 20px;
+      border-bottom: 3px solid var(--gold);
       text-align: left;
     }
-    .info-table th { color: var(--accent2); font-weight: 600; width: 35%; }
-    .info-table td { color: #ddd; }
+    .slide2-header h2 {
+      color: var(--gold);
+      font-size: 1em;
+      margin: 0;
+    }
 
-    .chart-container { width: 100%; height: 340px; margin-top: 0.3em; }
+    .chart-wrap {
+      width: 96%;
+      height: 270px;
+      margin: 6px auto 0;
+    }
 
-    .irr-highlight {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 0.5em;
+    .irr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 0 12px;
+      margin-top: 6px;
     }
     .irr-box {
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      padding: 14px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 10px;
       text-align: center;
+      box-shadow: 0 2px 6px rgba(62,33,21,0.08);
     }
-    .irr-box .irr-num { font-size: 1.3em; font-weight: 800; color: var(--success); }
-    .irr-box .irr-label { font-size: 0.4em; color: #aaa; margin-top: 4px; }
-    .irr-box.total .irr-num { font-size: 2em; color: var(--accent); }
+    .irr-box .irr-num {
+      font-size: 1.5em;
+      font-weight: 800;
+      color: var(--deepbrown);
+      line-height: 1.1;
+    }
+    .irr-box .irr-num.gold { color: var(--gold); }
+    .irr-box .irr-num.red  { color: var(--red); }
+    .irr-box .irr-label {
+      font-size: 0.38em;
+      color: var(--warmbrown);
+      margin-top: 3px;
+    }
+    .irr-box.primary {
+      background: var(--deepbrown);
+    }
+    .irr-box.primary .irr-num  { color: var(--gold); }
+    .irr-box.primary .irr-label { color: rgba(255,255,255,0.7); }
 
-    .note { font-size: 0.35em; color: #888; margin-top: 0.5em; text-align: center; }
+    .slide2-foot {
+      font-size: 0.35em;
+      color: var(--warmbrown);
+      text-align: center;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
 <div class="reveal">
   <div class="slides">
 
-    <!-- ===== Slide 1: 保單基本架構及優勢 ===== -->
-    <section data-background-image="images/bg-slide1.png"
-             data-background-opacity="0.25"
-             data-background-size="cover">
-      <div class="title-slide" style="margin-bottom: 0.4em;">
-        <div class="tag">趙賢彬 · 竹北置地董事長</div>
-        <h1>保德信指標變額<br>終身壽險（IVL）</h1>
-        <p class="subtitle">非分離帳戶 · 固定平準保費 · 保障＋投資</p>
-      </div>
+    <!-- ===== Slide 1: 保單基本架構 & 三優勢 ===== -->
+    <section style="padding:0;">
+      <div style="display:flex;flex-direction:column;height:100%;">
 
-      <table class="info-table">
-        <tr><th>商品名稱</th><td>保德信國際人壽終身壽險（指標變額型）</td></tr>
-        <tr><th>現承接公司</th><td>新光人壽（原台新人壽，2026 合併）</td></tr>
-        <tr><th>投保日期</th><td>2006 年 10 月 3 日</td></tr>
-        <tr><th>年繳保費</th><td>$258,984</td></tr>
-        <tr><th>繳費年期</th><td>20 期（2006～2025）</td></tr>
-        <tr><th>滿期日期</th><td>2026 年 3 月</td></tr>
-        <tr><th>核心機制</th><td>總保險金 = 基本保額（固定）＋ 變動保額（連結投資指標）</td></tr>
-        <tr><th>資金管理</th><td>非分離帳戶，保險公司統一管理，保戶不需自選標的</td></tr>
-      </table>
+        <div class="slide1-top">
+          <div class="tag">趙賢彬 · 竹北置地董事長</div>
+          <h1>保德信指標變額終身壽險<br>（IVL）</h1>
+          <div class="sub">非分離帳戶 · 固定平準保費 · 保障＋投資</div>
+        </div>
 
-      <h2 style="margin-top: 0.5em;">三大優勢</h2>
-      <div class="adv-grid">
-        <div class="adv-card">
-          <div class="adv-title">穩健省心</div>
-          <div class="adv-desc">非分離帳戶設計，保險公司專業管理<br>適合不熟悉市場的保戶</div>
+        <div class="info-grid">
+          <div class="item"><span class="label">商品名稱</span><span class="value">保德信國際人壽終身壽險（指標變額型）</span></div>
+          <div class="item"><span class="label">現承接公司</span><span class="value">新光人壽（2026 合併）</span></div>
+          <div class="item"><span class="label">投保日期</span><span class="value">2006 年 10 月 3 日</span></div>
+          <div class="item"><span class="label">年繳保費</span><span class="value">$258,984</span></div>
+          <div class="item"><span class="label">繳費年期</span><span class="value">20 期（2006～2025）</span></div>
+          <div class="item"><span class="label">滿期日期</span><span class="value">2026 年 3 月</span></div>
+          <div class="item" style="grid-column:span 2;"><span class="label">核心機制</span><span class="value">總保險金 = 基本保額（固定）＋ 變動保額（連結投資指標）</span></div>
+          <div class="item" style="grid-column:span 2;"><span class="label">資金管理</span><span class="value">非分離帳戶，保險公司統一管理，保戶不需自選標的</span></div>
         </div>
-        <div class="adv-card">
-          <div class="adv-title">保費固定</div>
-          <div class="adv-desc">平準保費，繳費期間不隨年齡調漲<br>20 年繳費規劃明確</div>
+
+        <div class="adv-title-row">三 大 優 勢</div>
+
+        <div class="adv-grid">
+          <div class="adv-card">
+            <div class="adv-title">穩健省心</div>
+            <div class="adv-desc">非分離帳戶，保險公司專業管理<br>適合不熟悉市場的保戶</div>
+          </div>
+          <div class="adv-card">
+            <div class="adv-title">保費固定</div>
+            <div class="adv-desc">平準保費不隨年齡調漲<br>20 年繳費規劃明確</div>
+          </div>
+          <div class="adv-card">
+            <div class="adv-title">保障＋投資</div>
+            <div class="adv-desc">終身壽險保障為底<br>投資增值放大總保險金額</div>
+          </div>
         </div>
-        <div class="adv-card">
-          <div class="adv-title">保障＋投資</div>
-          <div class="adv-desc">終身壽險保障為底<br>投資增值放大總保險金額</div>
-        </div>
-        <div class="adv-card">
-          <div class="adv-title">亮眼報酬</div>
-          <div class="adv-desc">20 年 IRR 達 12.63%<br>總回收 $1,693 萬，翻 3.27 倍</div>
-        </div>
+
       </div>
+      <div class="gold-bar"></div>
     </section>
 
     <!-- ===== Slide 2: 現金流量 & IRR ===== -->
-    <section>
-      <h2>現金流量 &amp; IRR 報酬率分析</h2>
+    <section style="padding:0;">
+      <div style="display:flex;flex-direction:column;height:100%;">
 
-      <div class="chart-container">
-        <canvas id="cashflowChart"></canvas>
+        <div class="slide2-header">
+          <h2>現金流量 &amp; IRR 報酬率分析</h2>
+        </div>
+
+        <div class="chart-wrap">
+          <canvas id="cashflowChart"></canvas>
+        </div>
+
+        <div class="irr-grid">
+          <div class="irr-box primary">
+            <div class="irr-num">12.63%</div>
+            <div class="irr-label">完整期間 IRR（2006～2026）</div>
+          </div>
+          <div class="irr-box">
+            <div class="irr-num red">$11,745,850</div>
+            <div class="irr-label">淨獲利</div>
+          </div>
+          <div class="irr-box">
+            <div class="irr-num" style="color:var(--warmbrown);">4.64%</div>
+            <div class="irr-label">前期 IRR（2006～2021）</div>
+          </div>
+        </div>
+
+        <div class="slide2-foot">投入 $5,179,680 → 含 2021 年部分領回 $5,625,530 → 滿期 $11,300,000</div>
+
       </div>
-
-      <div class="irr-highlight">
-        <div class="irr-box total">
-          <div class="irr-num">12.63%</div>
-          <div class="irr-label">完整期間 IRR（2006～2026）</div>
-        </div>
-        <div class="irr-box">
-          <div class="irr-num" style="color:var(--accent2);">$16,925,530</div>
-          <div class="irr-label">總回收金額</div>
-        </div>
-        <div class="irr-box">
-          <div class="irr-num" style="color:var(--success);">$11,745,850</div>
-          <div class="irr-label">淨獲利</div>
-        </div>
-        <div class="irr-box">
-          <div class="irr-num" style="color:var(--warn);">4.64%</div>
-          <div class="irr-label">前期 IRR（2006～2021，至首次回收）</div>
-        </div>
-      </div>
-
-      <div class="note">投入 $5,179,680 → 總回收 $16,925,530（含 2021 年部分領回 $5,625,530）</div>
+      <div class="gold-bar"></div>
     </section>
 
   </div>
@@ -178,20 +279,18 @@
     transition: 'slide',
     transitionSpeed: 'default',
     backgroundTransition: 'fade',
-    center: true,
+    center: false,
     progress: true,
     controls: true,
     slideNumber: 'c/t',
+    width: 960,
+    height: 600,
     plugins: []
   });
 
-  Reveal.on('ready', function () {
-    drawChart();
-  });
+  Reveal.on('ready', drawChart);
   Reveal.on('slidechanged', function (e) {
-    if (e.currentSlide.querySelector('#cashflowChart')) {
-      drawChart();
-    }
+    if (e.currentSlide.querySelector('#cashflowChart')) drawChart();
   });
 
   function drawChart() {
@@ -208,8 +307,6 @@
       5366546, -258984, -258984, -258984, -258984,
       11300000
     ];
-    const colors = values.map(v => v >= 0 ? 'rgba(129, 199, 132, 0.85)' : 'rgba(232, 100, 58, 0.75)');
-    const borderColors = values.map(v => v >= 0 ? '#81c784' : '#e8643a');
 
     new Chart(ctx, {
       type: 'bar',
@@ -218,10 +315,10 @@
         datasets: [{
           label: '每年現金流量 (NTD)',
           data: values,
-          backgroundColor: colors,
-          borderColor: borderColors,
+          backgroundColor: values.map(v => v >= 0 ? 'rgba(255,215,0,0.8)' : 'rgba(62,33,21,0.55)'),
+          borderColor: values.map(v => v >= 0 ? '#FFD700' : '#3E2115'),
           borderWidth: 1,
-          borderRadius: 3,
+          borderRadius: 2,
         }]
       },
       options: {
@@ -239,22 +336,21 @@
         },
         scales: {
           x: {
-            ticks: { color: '#aaa', font: { size: 9 } },
-            grid: { color: 'rgba(255,255,255,0.05)' }
+            ticks: { color: '#A47551', font: { size: 8 } },
+            grid: { color: 'rgba(62,33,21,0.06)' }
           },
           y: {
             ticks: {
-              color: '#aaa',
+              color: '#A47551',
               font: { size: 9 },
               callback: function (v) { return (v / 10000).toFixed(0) + '萬'; }
             },
-            grid: { color: 'rgba(255,255,255,0.08)' }
+            grid: { color: 'rgba(62,33,21,0.08)' }
           }
         }
       }
     });
   }
 </script>
-
 </body>
 </html>
