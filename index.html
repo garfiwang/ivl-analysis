@@ -365,6 +365,44 @@
       color: var(--deepbrown);
       line-height: 1.4;
     }
+
+    /* ===== Slide 8: 建議規劃 ===== */
+    .plan-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .plan-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 16px 24px;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.06);
+      border-left: 8px solid var(--gold);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .plan-card .plan-num-badge {
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .plan-card .plan-content {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--deepbrown);
+      line-height: 1.4;
+    }
   </style>
 </head>
 <body>
@@ -547,6 +585,34 @@
           <div class="risk-card">
             <div class="risk-num-badge">3</div>
             <div class="risk-content">沒有獲利了結，當市場反轉，賺的錢又縮水了</div>
+          </div>
+        </div>
+        <div class="gold-bar"></div>
+      </div>
+    </section>
+
+    <!-- ===== Slide 8: 建議規劃 ===== -->
+    <section>
+      <div class="slide-wrapper">
+        <div class="slide-header">
+          <h2>建議規劃</h2>
+        </div>
+        <div class="plan-container">
+          <div class="plan-card">
+            <div class="plan-num-badge">1</div>
+            <div class="plan-content">投資型保單的超額獲利轉出</div>
+          </div>
+          <div class="plan-card">
+            <div class="plan-num-badge">2</div>
+            <div class="plan-content">投資型保單維持保費|保額 比例 1:2</div>
+          </div>
+          <div class="plan-card">
+            <div class="plan-num-badge">3</div>
+            <div class="plan-content">另以 要/被/益 為 子/父/子 成立保單</div>
+          </div>
+          <div class="plan-card">
+            <div class="plan-num-badge">4</div>
+            <div class="plan-content">新保單首年度就有 2倍槓桿</div>
           </div>
         </div>
         <div class="gold-bar"></div>
