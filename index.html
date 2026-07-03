@@ -327,6 +327,44 @@
       margin-top: 4px;
       display: block;
     }
+
+    /* ===== Slide 7: 這張保單續存的風險 ===== */
+    .risk-container {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 15px;
+    }
+    .risk-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.06);
+      border-left: 8px solid var(--red);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .risk-card .risk-num-badge {
+      background: var(--red);
+      color: var(--white);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .risk-card .risk-content {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--deepbrown);
+      line-height: 1.4;
+    }
   </style>
 </head>
 <body>
@@ -487,6 +525,30 @@
           </div>
         </div>
 
+        <div class="gold-bar"></div>
+      </div>
+    </section>
+
+    <!-- ===== Slide 7: 這張保單續存的風險 ===== -->
+    <section>
+      <div class="slide-wrapper">
+        <div class="slide-header">
+          <h2>這張保單續存的風險</h2>
+        </div>
+        <div class="risk-container">
+          <div class="risk-card">
+            <div class="risk-num-badge">1</div>
+            <div class="risk-content">投資型保單的價值將被國稅局全額計入遺產稅</div>
+          </div>
+          <div class="risk-card">
+            <div class="risk-num-badge">2</div>
+            <div class="risk-content">獲利金額不確定</div>
+          </div>
+          <div class="risk-card">
+            <div class="risk-num-badge">3</div>
+            <div class="risk-content">沒有獲利了結，當市場反轉，賺的錢又縮水了</div>
+          </div>
+        </div>
         <div class="gold-bar"></div>
       </div>
     </section>
