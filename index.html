@@ -408,13 +408,28 @@
     .clause-container {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
       margin-top: 5px;
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 6px;
+      box-sizing: border-box;
+    }
+    .clause-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .clause-container::-webkit-scrollbar-track {
+      background: rgba(140, 94, 60, 0.08);
+      border-radius: 4px;
+    }
+    .clause-container::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border-radius: 4px;
     }
     .clause-card {
       background: var(--white);
       border-radius: 10px;
-      padding: 12px 18px;
+      padding: 10px 16px;
       box-shadow: 0 4px 10px rgba(62, 33, 21, 0.05);
       border-left: 6px solid var(--gold);
       text-align: left;
@@ -424,16 +439,16 @@
       background: #FFFDFD;
     }
     .clause-title {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
       color: var(--deepbrown);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .clause-badge {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       background: rgba(140, 94, 60, 0.12);
       color: var(--warmbrown);
@@ -448,35 +463,35 @@
       background: rgba(140, 94, 60, 0.06);
       border: 1px dashed var(--gold);
       border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 18px;
+      padding: 5px 10px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--deepbrown);
-      margin: 4px 0;
+      margin: 3px 0;
       text-align: center;
     }
     .clause-text {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--text-muted);
-      line-height: 1.45;
+      line-height: 1.4;
     }
     .clause-result-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 6px;
+      gap: 8px;
+      margin-top: 5px;
     }
     .clause-result-box {
       background: rgba(249, 245, 240, 0.8);
       border-radius: 6px;
-      padding: 6px 10px;
-      font-size: 14px;
-      line-height: 1.4;
+      padding: 5px 10px;
+      font-size: 13.5px;
+      line-height: 1.35;
       color: var(--deepbrown);
     }
     .clause-result-box .res-tag {
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14.5px;
       margin-bottom: 2px;
     }
   </style>
@@ -781,12 +796,30 @@
     plugins: []
   });
 
-  Reveal.on('ready', drawChart);
+  Reveal.on('ready', function () {
+    drawChart();
+    initClauseScroll();
+  });
   Reveal.on('slidechanged', function (e) {
     if (e.currentSlide.querySelector('#cashflowChart')) {
       drawChart();
     }
   });
+
+  function initClauseScroll() {
+    const clauseContainer = document.querySelector('.clause-container');
+    if (!clauseContainer) return;
+    clauseContainer.addEventListener('wheel', function (e) {
+      const scrollTop = clauseContainer.scrollTop;
+      const scrollHeight = clauseContainer.scrollHeight;
+      const clientHeight = clauseContainer.clientHeight;
+      const delta = e.deltaY;
+
+      if ((delta > 0 && scrollTop + clientHeight < scrollHeight - 2) || (delta < 0 && scrollTop > 2)) {
+        e.stopPropagation();
+      }
+    }, { passive: false });
+  }
 
   function drawChart() {
     const ctx = document.getElementById('cashflowChart');
