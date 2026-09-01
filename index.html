@@ -495,6 +495,36 @@
       font-size: 14.5px;
       margin-bottom: 2px;
     }
+
+    /* ===== Slide 10: 可選擇轉換的基金標的 ===== */
+    .fund-images-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 6px;
+      box-sizing: border-box;
+    }
+    .fund-images-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .fund-images-container::-webkit-scrollbar-track {
+      background: rgba(140, 94, 60, 0.08);
+      border-radius: 4px;
+    }
+    .fund-images-container::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border-radius: 4px;
+    }
+    .fund-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.1);
+      border: 1px solid rgba(62, 33, 21, 0.1);
+    }
   </style>
 </head>
 <body>
@@ -781,6 +811,20 @@
       </div>
     </section>
 
+    <!-- ===== Slide 9: 可選擇轉換的基金標的 ===== -->
+    <section>
+      <div class="slide-wrapper">
+        <div class="slide-header">
+          <h2>可選擇轉換的基金標的</h2>
+        </div>
+        <div class="fund-images-container">
+          <img src="images/fund-targets-1.png" alt="可選擇轉換的基金標的 Part 1" class="fund-img">
+          <img src="images/fund-targets-2.png" alt="可選擇轉換的基金標的 Part 2" class="fund-img">
+        </div>
+        <div class="gold-bar"></div>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -804,6 +848,7 @@
   Reveal.on('ready', function () {
     drawChart();
     initClauseScroll();
+    initFundScroll();
   });
   Reveal.on('slidechanged', function (e) {
     if (e.currentSlide.querySelector('#cashflowChart')) {
@@ -818,6 +863,21 @@
       const scrollTop = clauseContainer.scrollTop;
       const scrollHeight = clauseContainer.scrollHeight;
       const clientHeight = clauseContainer.clientHeight;
+      const delta = e.deltaY;
+
+      if ((delta > 0 && scrollTop + clientHeight < scrollHeight - 2) || (delta < 0 && scrollTop > 2)) {
+        e.stopPropagation();
+      }
+    }, { passive: false });
+  }
+
+  function initFundScroll() {
+    const fundContainer = document.querySelector('.fund-images-container');
+    if (!fundContainer) return;
+    fundContainer.addEventListener('wheel', function (e) {
+      const scrollTop = fundContainer.scrollTop;
+      const scrollHeight = fundContainer.scrollHeight;
+      const clientHeight = fundContainer.clientHeight;
       const delta = e.deltaY;
 
       if ((delta > 0 && scrollTop + clientHeight < scrollHeight - 2) || (delta < 0 && scrollTop > 2)) {
