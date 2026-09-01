@@ -245,15 +245,15 @@
     /* ===== Slide 6: IRR與獲利分析 ===== */
     .irr-container {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 20px;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 16px;
       margin-top: 10px;
     }
     .irr-main-card {
       background: var(--deepbrown);
       color: var(--white);
       border-radius: 12px;
-      padding: 30px;
+      padding: 24px;
       text-align: center;
       box-shadow: 0 4px 15px rgba(62, 33, 21, 0.15);
       display: flex;
@@ -262,47 +262,48 @@
       align-items: center;
     }
     .irr-main-card .irr-card-num {
-      font-size: 68px;
+      font-size: 64px;
       font-weight: 800;
       color: var(--brightgold);
       line-height: 1.1;
     }
     .irr-main-card .irr-card-label {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 700;
       margin-top: 15px;
     }
     .irr-main-card .irr-card-sub {
-      font-size: 19px;
+      font-size: 18px;
       color: rgba(255, 255, 255, 0.75);
       margin-top: 10px;
     }
     .irr-sub-grid {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
     .irr-sub-card {
       background: var(--white);
       border-radius: 12px;
-      padding: 14px 20px;
+      padding: 16px 14px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(62, 33, 21, 0.06);
-      border-left: 8px solid var(--gold);
+      border-left: 6px solid var(--gold);
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
     .irr-sub-card .irr-card-num {
-      font-size: 32px;
+      font-size: 26px;
       font-weight: 800;
       color: var(--deepbrown);
     }
     .irr-sub-card .irr-card-label {
-      font-size: 17px;
+      font-size: 15px;
       color: var(--text-muted);
       margin-top: 4px;
       font-weight: 600;
+      line-height: 1.3;
     }
     .summary-footer-box {
       background: rgba(140, 94, 60, 0.08);
@@ -707,15 +708,19 @@
           <div class="irr-sub-grid">
             <div class="irr-sub-card">
               <div class="irr-card-num" style="color: var(--warmbrown);">$5,179,680 元</div>
-              <div class="irr-card-label">20年累積總繳保費 (2006～2025 年)</div>
+              <div class="irr-card-label">20年累積總繳保費<br>(2006～2025 年)</div>
+            </div>
+            <div class="irr-sub-card">
+              <div class="irr-card-num" style="color: var(--gold);">$11,300,000 元</div>
+              <div class="irr-card-label">2026年現金價值<br>(滿期領回金額)</div>
             </div>
             <div class="irr-sub-card">
               <div class="irr-card-num" style="color: var(--red);">$6,120,320 元</div>
-              <div class="irr-card-label">滿期淨獲利 (總回收 - 總投入)</div>
+              <div class="irr-card-label">滿期淨獲利<br>(總回收 - 總投入)</div>
             </div>
             <div class="irr-sub-card">
               <div class="irr-card-num">4.64%</div>
-              <div class="irr-card-label">前期 IRR 年化報酬率 (至 2021 年)</div>
+              <div class="irr-card-label">前期 IRR 年化報酬率<br>(至 2021 年)</div>
             </div>
           </div>
         </div>
