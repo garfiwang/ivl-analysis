@@ -403,6 +403,82 @@
       color: var(--deepbrown);
       line-height: 1.4;
     }
+
+    /* ===== Slide: 條款精算與保底機制 ===== */
+    .clause-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 5px;
+    }
+    .clause-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 12px 18px;
+      box-shadow: 0 4px 10px rgba(62, 33, 21, 0.05);
+      border-left: 6px solid var(--gold);
+      text-align: left;
+    }
+    .clause-card.highlight-card {
+      border-left-color: var(--red);
+      background: #FFFDFD;
+    }
+    .clause-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--deepbrown);
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .clause-badge {
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(140, 94, 60, 0.12);
+      color: var(--warmbrown);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+    .clause-card.highlight-card .clause-badge {
+      background: rgba(207, 32, 46, 0.1);
+      color: var(--red);
+    }
+    .formula-box {
+      background: rgba(140, 94, 60, 0.06);
+      border: 1px dashed var(--gold);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--deepbrown);
+      margin: 4px 0;
+      text-align: center;
+    }
+    .clause-text {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .clause-result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .clause-result-box {
+      background: rgba(249, 245, 240, 0.8);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--deepbrown);
+    }
+    .clause-result-box .res-tag {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
   </style>
 </head>
 <body>
@@ -479,7 +555,69 @@
       </div>
     </section>
 
-    <!-- ===== Slide 4: 三大核心優勢 ===== -->
+    <!-- ===== Slide 4: 條款精算與保底機制 ===== -->
+    <section>
+      <div class="slide-wrapper">
+        <div class="slide-header">
+          <h2>保單條款精算與保底機制</h2>
+        </div>
+        <div class="clause-container">
+          
+          <div class="clause-card">
+            <div class="clause-title">
+              <span>1. 「保險金額」的構成方式</span>
+              <span class="clause-badge">第二條【名詞定義】</span>
+            </div>
+            <div class="formula-box">
+              保險金額 ＝ 基本保險金額 (1,000 萬) ＋ 累計變動保險金額
+            </div>
+            <div class="clause-text">
+              • <strong>基本保險金額</strong>：保單首頁所載金額（即您的投保金額 1,000 萬元）。<br>
+              • <strong>累計變動保險金額</strong>：由每一計算日算出的「變動保險金額」逐次累計所得（可正可負）。
+            </div>
+          </div>
+
+          <div class="clause-card">
+            <div class="clause-title">
+              <span>2. 「變動保險金額」怎麼算出來的？</span>
+              <span class="clause-badge">第十條【變動保險金額計算】</span>
+            </div>
+            <div class="formula-box">
+              調整因子 ＝ (指標月利率 − 預定月利率 3.75%) × 期中保單價值準備金
+            </div>
+            <div class="clause-text">
+              • 比較每一計算日「指標月利率」與「預定月利率（年利率 3.75% 換算之月利率）」，將該調整因子作為躉繳純保險費換算變動保額。<br>
+              • 📈 <strong>指標月利率 ＞ 預定月利率</strong> → 調整因子為正數 → 變動保險金額為正值（<strong>保額增加</strong>）。<br>
+              • 📉 <strong>指標月利率 ＜ 預定月利率</strong> → 調整因子為負數 → 變動保險金額為負值（<strong>保額減少</strong>）。
+            </div>
+          </div>
+
+          <div class="clause-card highlight-card">
+            <div class="clause-title">
+              <span style="color: var(--red);">3. 關鍵保底機制（差額補足）</span>
+              <span class="clause-badge">第十三條【保險範圍】第三項</span>
+            </div>
+            <div class="clause-text" style="font-style: italic; background: rgba(207,32,46,0.04); padding: 5px 10px; border-radius: 4px; margin-bottom: 4px;">
+              「累計變動保險金額為負值致第一、二項所指保險金額低於基本保險金額時，本公司就其差額另予補足給付受益人。」
+            </div>
+            <div class="clause-result-grid">
+              <div class="clause-result-box">
+                <div class="res-tag" style="color: #2e7d32;">🟢 投資表現良好 (變動保額為正數)</div>
+                <div>身故保險金 ＝ <strong>1,000萬 ＋ 累計變動保額 ＋ 未到期保費</strong><br><span style="font-size: 12px; color: var(--text-muted);">(保額高於 1,000 萬)</span></div>
+              </div>
+              <div class="clause-result-box">
+                <div class="res-tag" style="color: var(--red);">🛡️ 投資虧損/低於預定利率 (變動保額為負數)</div>
+                <div>計算金額雖低於 1,000 萬，但因保險公司必須補足差額，<strong>強制保底 1,000 萬元</strong>！<br>身故保險金 ＝ <strong>1,000萬 ＋ 未到期保費</strong></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="gold-bar"></div>
+      </div>
+    </section>
+
+    <!-- ===== Slide 5: 三大核心優勢 ===== -->
     <section>
       <div class="slide-wrapper">
         <div class="slide-header">
