@@ -63,11 +63,11 @@
     .med-summary-container {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-top: 5px;
-      max-height: 480px;
+      gap: 14px;
+      margin-top: 6px;
+      max-height: 485px;
       overflow-y: auto;
-      padding-right: 6px;
+      padding-right: 8px;
       box-sizing: border-box;
     }
     .med-summary-container::-webkit-scrollbar {
@@ -89,23 +89,21 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      letter-spacing: 1.2px;
+      line-height: 1.4;
     }
     .med-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 14px;
     }
     .med-card {
       background: var(--white);
-      border-radius: 10px;
-      padding: 14px 18px;
-      box-shadow: 0 4px 10px rgba(62, 33, 21, 0.05);
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.06);
       border-left: 6px solid var(--gold);
       text-align: left;
-    }
-    .med-card.alert-card {
-      border-left-color: var(--red);
-      background: #FFFDFD;
     }
     .med-card-head {
       font-size: 17px;
@@ -115,50 +113,64 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 6px;
+      letter-spacing: 0.8px;
+      line-height: 1.4;
     }
     .med-card-res {
       font-size: 16px;
       font-weight: 800;
       color: var(--deepbrown);
-    }
-    .med-card.alert-card .med-card-res {
-      color: var(--red);
+      letter-spacing: 0.8px;
+      line-height: 1.5;
+      margin-bottom: 4px;
     }
     .med-card-sub {
       font-size: 14px;
       color: var(--text-muted);
       margin-top: 4px;
+      letter-spacing: 0.6px;
+      line-height: 1.5;
     }
     .med-bottom-box {
       background: var(--white);
-      border-radius: 10px;
-      padding: 16px 20px;
-      box-shadow: 0 4px 10px rgba(62, 33, 21, 0.05);
+      border-radius: 12px;
+      padding: 18px 24px;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.06);
       border-left: 6px solid var(--warmbrown);
-      margin-top: 12px;
+      margin-top: 10px;
       text-align: left;
     }
     .med-bottom-section {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .med-bottom-section:last-child {
       margin-bottom: 0;
     }
     .med-bottom-head {
-      font-size: 17px;
+      font-size: 17.5px;
       font-weight: 700;
       color: var(--deepbrown);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       gap: 6px;
+      letter-spacing: 1px;
+      line-height: 1.4;
     }
     .med-bottom-list {
-      font-size: 15px;
+      font-size: 14.5px;
       color: var(--text-muted);
-      line-height: 1.5;
       padding-left: 20px;
       margin: 0;
+      list-style-type: disc;
+    }
+    .med-bottom-list li {
+      letter-spacing: 0.8px;
+      line-height: 1.85;
+      margin-bottom: 8px;
+    }
+    .med-bottom-list li:last-child {
+      margin-bottom: 0;
     }
   </style>
 </head>
