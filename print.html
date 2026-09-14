@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>趙賢彬 董事長保單報告（列印版）</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --deepbrown:   #3E2115;
+      --gold:        #C5A059;
+      --brightgold:  #FFD700;
+      --cream:       #F9F5F0;
+      --red:         #CF202E;
+      --warmbrown:   #8C5E3C;
+      --text-muted:  #5C3D30;
+      --white:       #FFFFFF;
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      background: #E5E0DA;
+      color: var(--deepbrown);
+    }
+
+    .print-page {
+      width: 297mm;
+      height: 210mm;
+      page-break-after: always;
+      break-after: page;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 16mm 20mm;
+      background: var(--cream);
+      margin: 0 auto;
+    }
+
+    /* 頂部裝飾條 */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--warmbrown);
+      border-bottom: 1.5px solid rgba(197, 160, 89, 0.4);
+      padding-bottom: 4mm;
+      margin-bottom: 6mm;
+    }
+    .top-header .brand {
+      color: var(--gold);
+      letter-spacing: 1.5px;
+    }
+
+    /* 底部金條與頁碼 */
+    .gold-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 6mm;
+      background: var(--gold);
+    }
+    .page-footer {
+      position: absolute;
+      bottom: 8mm;
+      left: 20mm;
+      right: 20mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10pt;
+      color: var(--warmbrown);
+      font-weight: 600;
+    }
+
+    /* 標準標題樣式 */
+    .slide-header {
+      border-left: 6px solid var(--gold);
+      padding-left: 14px;
+      margin-bottom: 6mm;
+      text-align: left;
+    }
+    .slide-header h2 {
+      font-size: 24pt;
+      color: var(--deepbrown);
+      margin: 0;
+      line-height: 1.2;
+      letter-spacing: 1px;
+      font-weight: 800;
+    }
+
+    /* ===== Page 1: 總首頁 ===== */
+    .cover-container {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 15mm 0;
+    }
+    .brand-tag {
+      font-size: 18pt;
+      color: var(--gold);
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 8mm;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-tag .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .cover-title {
+      font-size: 38pt !important;
+      color: var(--deepbrown);
+      line-height: 1.3 !important;
+      margin: 0 0 8mm 0 !important;
+      font-weight: 900;
+      letter-spacing: 2.5px;
+    }
+    .cover-divider {
+      width: 100px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 0 auto 8mm auto;
+    }
+    .advisors-pill {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 12px 36px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(62, 33, 21, 0.08);
+      border: 1.5px solid rgba(197, 160, 89, 0.4);
+    }
+    .advisor-item {
+      font-size: 16pt;
+      color: var(--deepbrown);
+      font-weight: 800;
+    }
+    .advisor-item .advisor-role {
+      font-size: 12pt;
+      color: var(--warmbrown);
+      font-weight: 600;
+      margin-left: 6px;
+    }
+    .advisor-sep {
+      color: var(--gold);
+      font-weight: 300;
+      font-size: 16pt;
+    }
+    .cover-date {
+      font-size: 13pt;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-top: 6mm;
+    }
+
+    /* ===== Page 2: 副封面 ===== */
+    .subcover-tag {
+      font-size: 18pt;
+      color: var(--warmbrown);
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 8mm;
+    }
+    .subcover-title {
+      font-size: 34pt !important;
+      color: var(--deepbrown);
+      line-height: 1.35 !important;
+      margin-bottom: 8mm !important;
+      font-weight: 900;
+    }
+    .subcover-sub {
+      font-size: 16pt;
+      color: var(--text-muted);
+      font-weight: 700;
+      background: rgba(140, 94, 60, 0.08);
+      padding: 10px 28px;
+      border-radius: 30px;
+      border: 1px solid rgba(140, 94, 60, 0.2);
+      display: inline-block;
+    }
+
+    /* ===== Page 3: 基本明細 ===== */
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15pt;
+      margin-top: 4mm;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(62, 33, 21, 0.06);
+    }
+    .details-table tr {
+      border-bottom: 1.5px solid rgba(62, 33, 21, 0.1);
+    }
+    .details-table tr:last-child {
+      border-bottom: none;
+    }
+    .details-table td {
+      padding: 13px 22px;
+      text-align: left;
+      line-height: 1.4;
+    }
+    .details-table .label {
+      color: var(--text-muted);
+      font-weight: 700;
+      width: 28%;
+      background: rgba(249, 245, 240, 0.6);
+    }
+    .details-table .value {
+      color: var(--deepbrown);
+      font-weight: 800;
+    }
+    .details-table .highlight-val {
+      color: var(--red);
+    }
+
+    /* ===== Page 4: 核心運作機制 ===== */
+    .info-blocks-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6mm;
+      margin-top: 4mm;
+    }
+    .info-block {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 28px;
+      box-shadow: 0 4px 14px rgba(62, 33, 21, 0.06);
+      border-left: 8px solid var(--warmbrown);
+      text-align: left;
+    }
+    .info-block .block-title {
+      font-size: 19pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      margin-bottom: 8px;
+    }
+    .info-block .block-content {
+      font-size: 15pt;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .info-block .bold-text {
+      font-weight: 800;
+      color: var(--deepbrown);
+    }
+    .info-block .highlight-text {
+      color: var(--red);
+      font-weight: 800;
+    }
+
+    /* ===== Page 5: 條款精算 ===== */
+    .clause-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4mm;
+    }
+    .clause-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 12px 18px;
+      box-shadow: 0 3px 10px rgba(62, 33, 21, 0.05);
+      border-left: 6px solid var(--gold);
+      text-align: left;
+    }
+    .clause-card.highlight-card {
+      border-left-color: var(--red);
+      background: rgba(255, 255, 255, 0.98);
+      border: 1.5px solid rgba(207, 32, 46, 0.3);
+      border-left: 6px solid var(--red);
+    }
+    .clause-title {
+      font-size: 13.5pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    .clause-badge {
+      font-size: 10pt;
+      font-weight: 700;
+      background: rgba(140, 94, 60, 0.12);
+      color: var(--warmbrown);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+    .formula-box {
+      background: rgba(140, 94, 60, 0.06);
+      border: 1px dashed var(--gold);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      margin: 3px 0;
+      text-align: center;
+    }
+    .clause-text {
+      font-size: 11pt;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .clause-result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 5px;
+    }
+    .clause-result-box {
+      background: rgba(249, 245, 240, 0.9);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 10.5pt;
+      line-height: 1.4;
+      color: var(--deepbrown);
+    }
+    .clause-result-box .res-tag {
+      font-weight: 800;
+      font-size: 11pt;
+      margin-bottom: 2px;
+    }
+
+    /* ===== Page 6: 三大核心優勢 ===== */
+    .advantages-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6mm;
+      margin-top: 6mm;
+    }
+    .advantage-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(62, 33, 21, 0.07);
+      border-top: 6px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .advantage-card .card-icon {
+      font-size: 38pt;
+      margin-bottom: 12px;
+    }
+    .advantage-card .card-title {
+      font-size: 18pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      margin-bottom: 12px;
+    }
+    .advantage-card .card-desc {
+      font-size: 13pt;
+      color: var(--text-muted);
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    /* ===== Page 7: 現金流量圖 ===== */
+    .chart-container-large {
+      width: 100%;
+      height: 110mm;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 4px 14px rgba(62, 33, 21, 0.06);
+      position: relative;
+    }
+    .chart-callout-left {
+      position: absolute;
+      top: 15mm;
+      left: 30mm;
+      background: rgba(249, 245, 240, 0.95);
+      border: 2px solid var(--warmbrown);
+      border-radius: 12px;
+      padding: 8px 18px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.08);
+      z-index: 10;
+    }
+    .chart-callout-left .callout-title {
+      font-size: 20pt;
+      font-weight: 900;
+      color: var(--deepbrown);
+      line-height: 1.15;
+    }
+    .chart-callout-left .callout-desc {
+      font-size: 10pt;
+      font-weight: 700;
+      color: var(--warmbrown);
+      margin-top: 2px;
+    }
+    .chart-callout-right {
+      position: absolute;
+      top: 10mm;
+      right: 25mm;
+      background: linear-gradient(135deg, rgba(197, 160, 89, 0.15), rgba(249, 245, 240, 0.95));
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      padding: 8px 18px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(62, 33, 21, 0.08);
+      z-index: 10;
+    }
+    .chart-callout-right .callout-surge {
+      font-size: 18pt;
+      font-weight: 900;
+      color: var(--deepbrown);
+      line-height: 1.2;
+    }
+    .chart-callout-right .callout-desc {
+      font-size: 10pt;
+      font-weight: 800;
+      color: var(--warmbrown);
+      margin-top: 2px;
+    }
+    .chart-legend-elder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 4mm;
+      font-size: 12pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .legend-item.highlighted-legend {
+      background: rgba(197, 160, 89, 0.15);
+      border: 1.5px solid var(--gold);
+    }
+    .legend-color-box {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+    .legend-color-box.outflow {
+      background-color: rgba(62, 33, 21, 0.6);
+      border: 1px solid var(--deepbrown);
+    }
+    .legend-color-box.part-refund {
+      background-color: rgba(197, 160, 89, 0.9);
+      border: 1px solid var(--gold);
+    }
+    .legend-color-box.final-claim {
+      background-color: rgba(207, 32, 46, 0.9);
+      border: 1px solid var(--red);
+    }
+
+    /* ===== Page 8: IRR 與獲利分析 ===== */
+    .irr-container {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 6mm;
+      margin-top: 4mm;
+    }
+    .irr-main-card {
+      background: var(--deepbrown);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: 0 4px 18px rgba(62, 33, 21, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .irr-main-card .irr-card-num {
+      font-size: 48pt;
+      font-weight: 900;
+      color: var(--brightgold);
+      line-height: 1.1;
+    }
+    .irr-main-card .irr-card-label {
+      font-size: 17pt;
+      font-weight: 800;
+      margin-top: 15px;
+    }
+    .irr-main-card .irr-card-sub {
+      font-size: 13pt;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 8px;
+    }
+    .irr-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+    }
+    .irr-sub-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.06);
+      border-left: 6px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .irr-sub-card .irr-card-num {
+      font-size: 18pt;
+      font-weight: 900;
+      color: var(--deepbrown);
+    }
+    .irr-sub-card .irr-card-label {
+      font-size: 12pt;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ===== Page 9: 保單風險 ===== */
+    .risk-container {
+      display: flex;
+      flex-direction: column;
+      gap: 5mm;
+      margin-top: 6mm;
+    }
+    .risk-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 4px 14px rgba(62, 33, 21, 0.06);
+      border-left: 8px solid var(--red);
+    }
+    .risk-num-badge {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--red);
+      color: var(--white);
+      font-size: 20pt;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .risk-content {
+      font-size: 17pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    /* ===== Page 10 & 11: 基金標的 ===== */
+    .fund-note-box {
+      background: var(--white);
+      border-left: 6px solid var(--gold);
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 4mm;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14pt;
+      color: var(--deepbrown);
+      font-weight: 800;
+      box-shadow: 0 2px 10px rgba(62, 33, 21, 0.05);
+      text-align: left;
+    }
+    .fund-note-badge {
+      background: rgba(207, 32, 46, 0.1);
+      color: var(--red);
+      font-size: 11pt;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .fund-img-frame {
+      background: var(--white);
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(62, 33, 21, 0.08);
+      border: 1px solid rgba(62, 33, 21, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .fund-img-full {
+      max-width: 100%;
+      max-height: 120mm;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    /* ===== Page 12 & 13: 醫療保障 ===== */
+    .med-grid-print {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-top: 2mm;
+    }
+    .med-card-print {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 18px 22px;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.06);
+      border-left: 6px solid var(--gold);
+      text-align: left;
+    }
+    .med-card-print .head {
+      font-size: 14pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      margin-bottom: 6px;
+    }
+    .med-card-print .res {
+      font-size: 15pt;
+      font-weight: 900;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+    .med-card-print .sub {
+      font-size: 11.5pt;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .med-section-box {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 18px 24px;
+      box-shadow: 0 4px 14px rgba(62, 33, 21, 0.06);
+      margin-bottom: 5mm;
+      text-align: left;
+    }
+    .med-section-box.gap-box {
+      border-left: 6px solid var(--red);
+    }
+    .med-section-box.sugg-box {
+      border-left: 6px solid var(--warmbrown);
+    }
+    .med-box-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .med-print-list {
+      font-size: 12pt;
+      color: var(--text-muted);
+      padding-left: 20px;
+      margin: 0;
+      line-height: 1.7;
+    }
+    .med-print-list li {
+      margin-bottom: 6px;
+    }
+    .med-print-list strong {
+      color: var(--deepbrown);
+      font-weight: 800;
+    }
+
+    /* ===== Page 14: 聯絡結尾頁 ===== */
+    .contact-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      height: 100%;
+      padding: 10mm 0;
+    }
+    .contact-qr-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 6px 20px rgba(62, 33, 21, 0.08);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-top: 6px solid var(--gold);
+    }
+    .contact-qr-img {
+      width: 55mm;
+      height: 55mm;
+      border-radius: 10px;
+      display: block;
+    }
+    .contact-qr-text {
+      margin-top: 12px;
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      letter-spacing: 1.2px;
+    }
+    .contact-qr-sub {
+      font-size: 11pt;
+      color: var(--warmbrown);
+      margin-top: 3px;
+      font-weight: 700;
+    }
+    .contact-info-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      box-shadow: 0 6px 20px rgba(62, 33, 21, 0.08);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-left: 6px solid var(--gold);
+      min-width: 120mm;
+    }
+    .contact-office-tag {
+      font-size: 11pt;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+    .contact-office-title {
+      font-size: 24pt;
+      font-weight: 900;
+      color: var(--deepbrown);
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+    .contact-tagline {
+      font-size: 13pt;
+      color: var(--warmbrown);
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .contact-advisors-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 18px;
+      background: rgba(249, 245, 240, 0.85);
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1px dashed rgba(197, 160, 89, 0.4);
+    }
+    .contact-advisor-row {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .contact-advisor-row .c-role {
+      font-size: 12pt;
+      color: var(--warmbrown);
+      font-weight: 700;
+    }
+    .contact-email-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 14pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      background: rgba(197, 160, 89, 0.15);
+      border: 1.5px solid var(--gold);
+      padding: 12px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== Page 1: 總首頁 ==================== -->
+  <div class="print-page">
+    <div class="cover-container">
+      <div class="brand-tag">
+        <span class="dot"></span>
+        問大師家族辦公室
+        <span class="dot"></span>
+      </div>
+      
+      <h1 class="cover-title">
+        趙賢彬 董事長保單報告
+      </h1>
+
+      <div class="cover-divider"></div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <div class="advisors-pill">
+          <div class="advisor-item">
+            王執定 <span class="advisor-role">顧問 / 創辦人</span>
+          </div>
+          <div class="advisor-sep">|</div>
+          <div class="advisor-item">
+            黃芷翊 <span class="advisor-role">顧問</span>
+          </div>
+        </div>
+
+        <div class="cover-date">
+          2026 年 9 月 11 日
+        </div>
+      </div>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 2: 專案副封面 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長專屬報告</span>
+    </div>
+    <div class="cover-container">
+      <div class="subcover-tag">趙賢彬 · 竹北置地董事長專屬報告</div>
+      <h1 class="subcover-title">保德信指標變額終身壽險<br>（IVL）分析</h1>
+      <div class="subcover-sub">非分離帳戶 ｜ 固定平準保費 ｜ 保障 ＋ 投資</div>
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 2</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 3: 保單基本明細 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>保單基本明細</h2>
+    </div>
+    <table class="details-table">
+      <tr>
+        <td class="label">商品名稱</td>
+        <td class="value">保德信國際人壽終身壽險（指標變額型）</td>
+      </tr>
+      <tr>
+        <td class="label">現承接公司</td>
+        <td class="value">新光人壽（2026 合併）</td>
+      </tr>
+      <tr>
+        <td class="label">投保日期</td>
+        <td class="value">2006 年 10 月 3 日</td>
+      </tr>
+      <tr>
+        <td class="label">年繳保費</td>
+        <td class="value highlight-val">$258,984 元</td>
+      </tr>
+      <tr>
+        <td class="label">繳費年期</td>
+        <td class="value">20 期（2006 ～ 2025 年）</td>
+      </tr>
+      <tr>
+        <td class="label">滿期日期</td>
+        <td class="value highlight-val">2026 年 3 月（已滿期）</td>
+      </tr>
+      <tr>
+        <td class="label">115年6月解約金</td>
+        <td class="value highlight-val" style="color: var(--red); font-size: 18pt;">$15,468,196 元</td>
+      </tr>
+    </table>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 3</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 4: 保單核心運作機制 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>保單核心運作機制</h2>
+    </div>
+    <div class="info-blocks-container">
+      <div class="info-block">
+        <div class="block-title">💡 總保險金額組成</div>
+        <div class="block-content">
+          總保險金 = <span class="bold-text">基本保額</span>（固定保障） ＋ <span class="bold-text highlight-text">變動保額</span>（連結投資指標）
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="block-title">🛡️ 專業資金管理</div>
+        <div class="block-content">
+          本保單採用 <span class="bold-text">非分離帳戶</span>。資金由保險公司統一專業管理與投資，保戶<span class="highlight-text">免去自選標的</span>的煩惱。
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 4</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 5: 保單條款精算與保底機制 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>保單條款精算與保底機制</h2>
+    </div>
+    <div class="clause-container">
+      
+      <div class="clause-card">
+        <div class="clause-title">
+          <span>1. 「保險金額」的構成方式</span>
+          <span class="clause-badge">第二條【名詞定義】</span>
+        </div>
+        <div class="formula-box">
+          保險金額 ＝ 基本保險金額 (1,000 萬) ＋ 累計變動保險金額
+        </div>
+        <div class="clause-text">
+          • <strong>基本保險金額</strong>：保單首頁所載金額（即您的投保金額 1,000 萬元）。<br>
+          • <strong>累計變動保險金額</strong>：由每一計算日算出的「變動保險金額」逐次累計所得（可正可負）。
+        </div>
+      </div>
+
+      <div class="clause-card">
+        <div class="clause-title">
+          <span>2. 「變動保險金額」怎麼算出來的？</span>
+          <span class="clause-badge">第十條【變動保險金額計算】</span>
+        </div>
+        <div class="formula-box">
+          調整因子 ＝ (指標月利率 − 預定月利率 3.75%) × 期中保單價值準備金
+        </div>
+        <div class="clause-text">
+          • 比較每一計算日「指標月利率」與「預定月利率（年利率 3.75% 換算之月利率）」，將該調整因子作為躉繳純保險費換算變動保額。<br>
+          • 📈 <strong>指標月利率 ＞ 預定月利率</strong> → 調整因子為正數 → 變動保險金額為正值（<strong>保額增加</strong>）。<br>
+          • 📉 <strong>指標月利率 ＜ 預定月利率</strong> → 調整因子為負數 → 變動保險金額為負值（<strong>保額減少</strong>）。
+        </div>
+      </div>
+
+      <div class="clause-card highlight-card">
+        <div class="clause-title">
+          <span style="color: var(--red);">3. 關鍵保底機制（差額補足）</span>
+          <span class="clause-badge">第十三條【保險範圍】第三項</span>
+        </div>
+        <div class="clause-text" style="font-style: italic; background: rgba(207,32,46,0.04); padding: 4px 8px; border-radius: 4px; margin-bottom: 4px;">
+          「累計變動保險金額為負值致第一、二項所指保險金額低於基本保險金額時，本公司就其差額另予補足給付受益人。」
+        </div>
+        <div class="clause-result-grid">
+          <div class="clause-result-box">
+            <div class="res-tag" style="color: #2e7d32;">🟢 投資表現良好 (變動保額為正數)</div>
+            <div>身故保險金 ＝ <strong>1,000萬 ＋ 累計變動保額 ＋ 未到期保費</strong> (保額高於 1,000 萬)</div>
+          </div>
+          <div class="clause-result-box">
+            <div class="res-tag" style="color: var(--red);">🛡️ 投資虧損/低於預定利率 (變動保額為負數)</div>
+            <div>計算金額雖低於 1,000 萬，但保險公司必須補足差額，<strong>強制保底 1,000 萬元</strong>！</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 5</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 6: 三大核心優勢 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>三大核心優勢</h2>
+    </div>
+    <div class="advantages-container">
+      <div class="advantage-card">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">穩健省心</div>
+        <div class="card-desc">非分離帳戶由保險公司專業操作，免除個人挑選投資標的的波動風險。</div>
+      </div>
+      <div class="advantage-card">
+        <div class="card-icon">💰</div>
+        <div class="card-title">保費固定</div>
+        <div class="card-desc">平準化保費設計，不隨年齡增長而調漲，20年繳費預算完全明確。</div>
+      </div>
+      <div class="advantage-card">
+        <div class="card-icon">📈</div>
+        <div class="card-title">保障＋投資</div>
+        <div class="card-desc">以終身壽險的保障為根本，透過投資增值部分，進一步放大總理賠金額。</div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 6</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 7: 現金流量變化圖 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>現金流量變化圖 (2006 ~ 2026 年)</h2>
+    </div>
+    <div class="chart-container-large">
+      <div class="chart-callout-left">
+        <div class="callout-title">總繳 518 萬</div>
+        <div class="callout-desc">每年固定約 25.9 萬 × 20 年</div>
+      </div>
+      
+      <div class="chart-callout-right">
+        <div class="callout-surge">大環境市場效益</div>
+        <div class="callout-desc">滿期回收逾投入 3 倍</div>
+      </div>
+
+      <canvas id="cashflowChartPrint"></canvas>
+    </div>
+    <div class="chart-legend-elder">
+      <div class="legend-item highlighted-legend">
+        <span class="legend-color-box outflow"></span>
+        <span>每年繳保費約 25.9 萬</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-color-box part-refund"></span>
+        <span>2021年現金價值 (536.7 萬)</span>
+      </div>
+      <div class="legend-item highlighted-legend">
+        <span class="legend-color-box final-claim"></span>
+        <span>2026 年現金價值 (1130 萬)</span>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 7</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 8: 保單報酬率與淨獲利分析 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>保單報酬率與淨獲利分析</h2>
+    </div>
+    <div class="irr-container">
+      <div class="irr-main-card">
+        <div class="irr-card-num">12.63%</div>
+        <div class="irr-card-label">完整期間 IRR 年化報酬率</div>
+        <div class="irr-card-sub">2006 年 ～ 2026 年（滿期 20 年）</div>
+      </div>
+      <div class="irr-sub-grid">
+        <div class="irr-sub-card">
+          <div class="irr-card-num" style="color: var(--warmbrown);">$5,179,680 元</div>
+          <div class="irr-card-label">20年累積總繳保費<br>(2006～2025 年)</div>
+        </div>
+        <div class="irr-sub-card">
+          <div class="irr-card-num" style="color: var(--gold);">$15,468,196 元</div>
+          <div class="irr-card-label">115年6月解約金<br>(2026年6月金額)</div>
+        </div>
+        <div class="irr-sub-card">
+          <div class="irr-card-num" style="color: var(--red);">$6,120,320 元</div>
+          <div class="irr-card-label">滿期淨獲利<br>(總回收 - 總投入)</div>
+        </div>
+        <div class="irr-sub-card">
+          <div class="irr-card-num">4.64%</div>
+          <div class="irr-card-label">前期 IRR 年化報酬率<br>(至 2021 年)</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 8</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 9: 這張保單續存的風險 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>這張保單續存的風險</h2>
+    </div>
+    <div class="risk-container">
+      <div class="risk-card">
+        <div class="risk-num-badge">1</div>
+        <div class="risk-content">投資型保單的價值將被國稅局全額計入遺產稅</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-num-badge">2</div>
+        <div class="risk-content">獲利金額不確定</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-num-badge">3</div>
+        <div class="risk-content">沒有獲利了結，當市場反轉，賺的錢又縮水了</div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 9</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 10: 基金標的（一） ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>可選擇轉換的基金標的（一）</h2>
+    </div>
+    <div class="fund-note-box">
+      <span class="fund-note-badge">標的說明</span>
+      <span>能選擇的基金標的有限制（全平台共 14 檔基金）</span>
+    </div>
+    <div class="fund-img-frame">
+      <img src="images/fund-targets-1.png" alt="可選擇轉換的基金標的 Part 1" class="fund-img-full" />
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 10</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 11: 基金標的（二） ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>可選擇轉換的基金標的（二）</h2>
+    </div>
+    <div class="fund-note-box">
+      <span class="fund-note-badge">標的說明</span>
+      <span>投資標的明細表（續）</span>
+    </div>
+    <div class="fund-img-frame">
+      <img src="images/fund-targets-2.png" alt="可選擇轉換的基金標的 Part 2" class="fund-img-full" />
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 11</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 12: 醫療與健康保障（一） ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>【趙賢彬 董事長】個人醫療與健康保障（一）</h2>
+    </div>
+    <div style="font-size: 14pt; font-weight: 800; color: var(--deepbrown); margin-bottom: 4mm;">
+      🚨 4 大關鍵醫療風險情境 理賠結論總覽
+    </div>
+    <div class="med-grid-print">
+      <div class="med-card-print">
+        <div class="head">1. 重大疾病與癌症（一次性大筆拿回）</div>
+        <div class="res">👉 結論：最高僅 NT$ 42.5 萬</div>
+        <div class="sub">(癌症重度 22.5 萬 ＋ 重大疾病 20 萬)</div>
+      </div>
+
+      <div class="med-card-print">
+        <div class="head">2. 住院與高額自費醫療（標靶/手術/雜費）</div>
+        <div class="res">👉 結論：住院日額 2,500元 / 雜費 22.5 萬</div>
+        <div class="sub">(門診手術限額 16.5 萬)</div>
+      </div>
+
+      <div class="med-card-print">
+        <div class="head">3. 癌症 ｜ 長期照護</div>
+        <div class="res">👉 結論：癌症住院 5,100 元；化療 2,400 元</div>
+        <div class="sub">(長期照護 完全零規劃)</div>
+      </div>
+
+      <div class="med-card-print">
+        <div class="head">4. 身故壽險保障</div>
+        <div class="res">👉 結論：14.6 萬美元 ＋ 1,365 萬台幣</div>
+        <div class="sub">(南山美元壽險 14.6萬美元 ＋ 新光/富邦壽險 1,365萬)</div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 12</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 13: 醫療與健康保障（二） ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>【趙賢彬 董事長】個人醫療與健康保障（二）</h2>
+    </div>
+
+    <div class="med-section-box gap-box">
+      <div class="med-box-title">💡 總結報告（3 大核心缺口）</div>
+      <ul class="med-print-list">
+        <li><strong>壽險保障不足（無法對應實際身價）</strong>：現有身故保障「14.6 萬美元 ＋ 1,365 萬台幣」，未來的稅源與傳承額度不足。</li>
+        <li><strong>自費病房「存在百萬醫療缺口」</strong>：癌症標靶自費年花費 80～200 萬 vs 現有一次金僅 22.5 萬（年缺口 60～150 萬）；台北單人房每日 4,000～8,000 元 vs 現有日額僅 2,500 元（日缺口 1,500～5,500 元）。</li>
+        <li><strong>長期照護「完全零規劃」（隱形現金流黑洞）</strong>：國人平均需照護 7.3 年、月花費 3～5 萬（一生總花費 300～500 萬）；現有保單 0 給付，面臨 100% 自費侵蝕個人資產。</li>
+      </ul>
+    </div>
+
+    <div class="med-section-box sugg-box">
+      <div class="med-box-title" style="color: var(--warmbrown);">➕ 建議增加項目（3 大精準補強）</div>
+      <ul class="med-print-list">
+        <li><strong style="color: var(--red);">預留稅源與高額傳承壽險</strong>：對應趙董龐大資產規模，創造免稅/指定繼承之傳承現金流，防範未來鉅額遺產稅變現壓力。</li>
+        <li><strong>高端自費防癌 / 標靶一次金專案（目標 100～200 萬）</strong>：確診即付百萬現金，全額對沖第 1～2 年自費標靶與免疫治療。</li>
+        <li><strong style="color: var(--red);">長期照護專屬現金流專案（目標每月 3～5 萬，或年給付 50 萬）</strong>：專款專用支應看護與耗材，鎖住 300～500 萬長照黑洞。</li>
+      </ul>
+    </div>
+
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 13</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 14: 聯絡結尾頁 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="contact-container">
+      
+      <!-- 左側 QR Code 卡片 -->
+      <div class="contact-qr-card">
+        <img src="images/contact-qrcode.png" alt="問大師家族辦公室 QR Code" class="contact-qr-img" />
+        <div class="contact-qr-text">掃描 QR Code</div>
+        <div class="contact-qr-sub">即時諮詢 ｜ 專屬規劃</div>
+      </div>
+
+      <!-- 右側 顧問與聯繫資訊 卡片 -->
+      <div class="contact-info-card">
+        <div class="contact-office-tag">FAMILY OFFICE SERVICE</div>
+        <div class="contact-office-title">問大師家族辦公室</div>
+        <div class="contact-tagline">守護家族資產 ｜ 傳承百年智慧</div>
+        
+        <div class="contact-advisors-box">
+          <div class="contact-advisor-row">
+            <span>👤</span>
+            <span>王執定</span>
+            <span class="c-role">顧問 / 創辦人</span>
+          </div>
+          <div class="contact-advisor-row">
+            <span>👤</span>
+            <span>黃芷翊</span>
+            <span class="c-role">顧問</span>
+          </div>
+        </div>
+
+        <div class="contact-email-btn">
+          <span>✉️</span>
+          <span>richnews168@gmail.com</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 14</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const ctx = document.getElementById('cashflowChartPrint');
+    if (!ctx) return;
+
+    const labels = ['2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026'];
+    const values = [
+      -258984, -258984, -258984, -258984, -258984,
+      -258984, -258984, -258984, -258984, -258984,
+      -258984, -258984, -258984, -258984, -258984,
+      5366546, -258984, -258984, -258984, -258984,
+      11300000
+    ];
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '每年現金流量 (NTD)',
+          data: values,
+          backgroundColor: values.map((v, i) => {
+            if (i === 15) return 'rgba(197, 160, 89, 0.95)';
+            if (i === 20) return 'rgba(207, 32, 46, 0.95)';
+            return 'rgba(62, 33, 21, 0.65)';
+          }),
+          borderColor: values.map((v, i) => {
+            if (i === 15) return '#C5A059';
+            if (i === 20) return '#CF202E';
+            return '#3E2115';
+          }),
+          borderWidth: 1.5,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            ticks: { 
+              color: '#3E2115', 
+              font: { size: 12, weight: 'bold', family: 'sans-serif' }
+            },
+            grid: { color: 'rgba(62, 33, 21, 0.08)' }
+          },
+          y: {
+            ticks: {
+              color: '#3E2115',
+              font: { size: 12, weight: 'bold', family: 'sans-serif' },
+              callback: function (v) {
+                if (v === 0) return '0';
+                const prefix = v > 0 ? '+' : '';
+                return prefix + (v / 10000).toLocaleString('zh-TW', { maximumFractionDigits: 1 }) + ' 萬';
+              }
+            },
+            grid: { color: 'rgba(62, 33, 21, 0.1)' }
+          }
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
