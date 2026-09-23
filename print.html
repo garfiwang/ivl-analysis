@@ -810,6 +810,137 @@
       text-decoration: none;
       width: 100%;
     }
+
+    /* ===== Page: 部分解約與退回解約金機制專用樣式 ===== */
+    .surrender-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4.5mm;
+      margin-top: 2mm;
+    }
+    .surrender-rule-box {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 12px 20px;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.06);
+      border-left: 6px solid var(--gold);
+      text-align: left;
+    }
+    .surrender-rule-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .surrender-rule-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--deepbrown);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .surrender-rule-badge {
+      background: rgba(197, 160, 89, 0.18);
+      color: var(--warmbrown);
+      font-size: 11pt;
+      font-weight: 800;
+      padding: 3px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--gold);
+    }
+    .surrender-rule-desc {
+      font-size: 12pt;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .surrender-rule-desc strong {
+      color: var(--deepbrown);
+      font-weight: 800;
+    }
+    .surrender-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4.5mm;
+    }
+    .surrender-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 14px 12px;
+      box-shadow: 0 4px 12px rgba(62, 33, 21, 0.06);
+      border-top: 5px solid var(--warmbrown);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .surrender-card.highlight {
+      border-top: 5px solid var(--red);
+      background: #FFFDFC;
+      box-shadow: 0 6px 16px rgba(207, 32, 46, 0.12);
+    }
+    .surrender-badge {
+      background: rgba(140, 94, 60, 0.12);
+      color: var(--warmbrown);
+      font-size: 11pt;
+      font-weight: 800;
+      padding: 3px 12px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+    .surrender-card.highlight .surrender-badge {
+      background: rgba(207, 32, 46, 0.12);
+      color: var(--red);
+    }
+    .surrender-cash {
+      font-size: 20pt;
+      font-weight: 900;
+      color: var(--deepbrown);
+      margin: 2px 0;
+      letter-spacing: -0.5px;
+    }
+    .surrender-card.highlight .surrender-cash {
+      color: var(--red);
+    }
+    .surrender-cash-label {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: var(--warmbrown);
+      margin-bottom: 8px;
+    }
+    .surrender-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(197, 160, 89, 0.3);
+      margin-bottom: 8px;
+    }
+    .surrender-detail {
+      font-size: 10.5pt;
+      color: var(--text-muted);
+      line-height: 1.5;
+      text-align: left;
+      width: 100%;
+    }
+    .surrender-detail div {
+      margin-bottom: 3px;
+    }
+    .surrender-notice {
+      background: rgba(197, 160, 89, 0.12);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 11pt;
+      color: var(--deepbrown);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px dashed rgba(197, 160, 89, 0.6);
+      line-height: 1.5;
+    }
+    .surrender-notice-icon {
+      font-size: 15pt;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -1127,7 +1258,100 @@
     <div class="gold-bar"></div>
   </div>
 
-  <!-- ==================== Page 9: 這張保單續存的風險 ==================== -->
+  <!-- ==================== Page 9: 部分解約與解約金退回機制 ==================== -->
+  <div class="print-page">
+    <div class="top-header">
+      <span class="brand">問大師家族辦公室</span>
+      <span>趙賢彬 董事長保單報告</span>
+    </div>
+    <div class="slide-header">
+      <h2>部分解約（減少保額）與解約金退回機制</h2>
+    </div>
+    <div class="surrender-container">
+      
+      <!-- 條款規則說明卡 -->
+      <div class="surrender-rule-box">
+        <div class="surrender-rule-header">
+          <div class="surrender-rule-title">
+            <span>📜 保單條款約定規範</span>
+          </div>
+          <span class="surrender-rule-badge">第十九條【減少基本保險金額】</span>
+        </div>
+        <div class="surrender-rule-desc">
+          • <strong>減少部分視為終止契約</strong>：要保人得申請減少基本保額，保險公司將按減少比例<strong>退回對應之解約金</strong>。<br>
+          • <strong>連動等比例減少</strong>：減少基本保額時，累計變動保險金額<strong>依相同比例減少</strong>（不接受僅減少變動保額）。<br>
+          • <strong>最低承保金額限制</strong>：減額後基本保額<strong>不得低於 50 萬元</strong>（趙董最高可減額 950 萬 / 95%）。
+        </div>
+      </div>
+
+      <!-- 4 欄提領試算 Grid (以 115/06 滿期總解約金 $15,468,196 為基準) -->
+      <div class="surrender-grid">
+        <div class="surrender-card">
+          <div class="surrender-badge">方案 ① 減額 30%</div>
+          <div class="surrender-cash">$464.0 萬</div>
+          <div class="surrender-cash-label">退回解約金 ($4,640,459)</div>
+          <div class="surrender-divider"></div>
+          <div class="surrender-detail">
+            <div>• 基本保額降至：<strong>700 萬元</strong></div>
+            <div>• 變動保額保留：<strong>70% 續存</strong></div>
+            <div>• 保留 700 萬終身保底與成長</div>
+          </div>
+        </div>
+
+        <div class="surrender-card">
+          <div class="surrender-badge">方案 ② 減額 50%</div>
+          <div class="surrender-cash">$773.4 萬</div>
+          <div class="surrender-cash-label">退回解約金 ($7,734,098)</div>
+          <div class="surrender-divider"></div>
+          <div class="surrender-detail">
+            <div>• 基本保額降至：<strong>500 萬元</strong></div>
+            <div>• 變動保額保留：<strong>50% 續存</strong></div>
+            <div>• 保留半數資產持續滾存</div>
+          </div>
+        </div>
+
+        <div class="surrender-card">
+          <div class="surrender-badge">方案 ③ 減額 80%</div>
+          <div class="surrender-cash">$1,237.5 萬</div>
+          <div class="surrender-cash-label">退回解約金 ($12,374,557)</div>
+          <div class="surrender-divider"></div>
+          <div class="surrender-detail">
+            <div>• 基本保額降至：<strong>200 萬元</strong></div>
+            <div>• 變動保額保留：<strong>20% 續存</strong></div>
+            <div>• 大幅落袋為安，鎖定獲利</div>
+          </div>
+        </div>
+
+        <div class="surrender-card highlight">
+          <div class="surrender-badge">方案 ④ 最大減額 95%</div>
+          <div class="surrender-cash">$1,469.5 萬</div>
+          <div class="surrender-cash-label">退回解約金 ($14,694,786)</div>
+          <div class="surrender-divider"></div>
+          <div class="surrender-detail">
+            <div>• 保留最低保額：<strong>50 萬元</strong></div>
+            <div>• 變動保額保留：<strong>5% 續存</strong></div>
+            <div>• 提領 95% 現金＋維持保單有效</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部作業與生效提醒 -->
+      <div class="surrender-notice">
+        <span class="surrender-notice-icon">💡</span>
+        <div>
+          <strong>生效與撥款時程</strong>：申請自保險公司收到書面通知後之<strong>「下一個計算日之翌日開始生效」</strong>（每月 1 日之翌日）。生效後依條款第九條約定於 1 個月內給付解約金；未解約之保額與保底機制持續有效。
+        </div>
+      </div>
+
+    </div>
+    <div class="page-footer">
+      <span>問大師家族辦公室 · 財務規劃</span>
+      <span>Page 9</span>
+    </div>
+    <div class="gold-bar"></div>
+  </div>
+
+  <!-- ==================== Page 10: 這張保單續存的風險 ==================== -->
   <div class="print-page">
     <div class="top-header">
       <span class="brand">問大師家族辦公室</span>
@@ -1152,12 +1376,12 @@
     </div>
     <div class="page-footer">
       <span>問大師家族辦公室 · 財務規劃</span>
-      <span>Page 9</span>
+      <span>Page 10</span>
     </div>
     <div class="gold-bar"></div>
   </div>
 
-  <!-- ==================== Page 10: 基金標的（一） ==================== -->
+  <!-- ==================== Page 11: 基金標的（一） ==================== -->
   <div class="print-page">
     <div class="top-header">
       <span class="brand">問大師家族辦公室</span>
@@ -1175,12 +1399,12 @@
     </div>
     <div class="page-footer">
       <span>問大師家族辦公室 · 財務規劃</span>
-      <span>Page 10</span>
+      <span>Page 11</span>
     </div>
     <div class="gold-bar"></div>
   </div>
 
-  <!-- ==================== Page 11: 基金標的（二） ==================== -->
+  <!-- ==================== Page 12: 基金標的（二） ==================== -->
   <div class="print-page">
     <div class="top-header">
       <span class="brand">問大師家族辦公室</span>
@@ -1198,12 +1422,12 @@
     </div>
     <div class="page-footer">
       <span>問大師家族辦公室 · 財務規劃</span>
-      <span>Page 11</span>
+      <span>Page 12</span>
     </div>
     <div class="gold-bar"></div>
   </div>
 
-  <!-- ==================== Page 12: 醫療與健康保障（一） ==================== -->
+  <!-- ==================== Page 13: 醫療與健康保障（一） ==================== -->
   <div class="print-page">
     <div class="top-header">
       <span class="brand">問大師家族辦公室</span>
@@ -1242,12 +1466,12 @@
     </div>
     <div class="page-footer">
       <span>問大師家族辦公室 · 財務規劃</span>
-      <span>Page 12</span>
+      <span>Page 13</span>
     </div>
     <div class="gold-bar"></div>
   </div>
 
-  <!-- ==================== Page 13: 醫療與健康保障（二） ==================== -->
+  <!-- ==================== Page 14: 醫療與健康保障（二） ==================== -->
   <div class="print-page">
     <div class="top-header">
       <span class="brand">問大師家族辦公室</span>
@@ -1277,12 +1501,12 @@
 
     <div class="page-footer">
       <span>問大師家族辦公室 · 財務規劃</span>
-      <span>Page 13</span>
+      <span>Page 14</span>
     </div>
     <div class="gold-bar"></div>
   </div>
 
-  <!-- ==================== Page 14: 聯絡結尾頁 ==================== -->
+  <!-- ==================== Page 15: 聯絡結尾頁 ==================== -->
   <div class="print-page">
     <div class="top-header">
       <span class="brand">問大師家族辦公室</span>
@@ -1325,7 +1549,7 @@
     </div>
     <div class="page-footer">
       <span>問大師家族辦公室 · 財務規劃</span>
-      <span>Page 14</span>
+      <span>Page 15</span>
     </div>
     <div class="gold-bar"></div>
   </div>
